@@ -18,8 +18,10 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'FullName',
+        'FirstName',
+        'LastName',
+        'username',
         'password',
     ];
 
@@ -44,5 +46,37 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the user's email attribute (using username for authentication).
+     */
+    public function getEmailAttribute()
+    {
+        return $this->username;
+    }
+
+    /**
+     * Get the user's name attribute.
+     */
+    public function getNameAttribute()
+    {
+        return $this->FullName ?: trim(($this->FirstName ?? '') . ' ' . ($this->LastName ?? ''));
+    }
+
+    /**
+     * Get the posts authored by this user.
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
+
+    /**
+     * Get the comments authored by this user.
+     */
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
     }
 }
