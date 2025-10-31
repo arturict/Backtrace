@@ -159,7 +159,7 @@ The project uses GitHub Actions for continuous integration:
 - Workflow: `.github/workflows/laravel.yml`
 - Runs on: Push to main, Pull Requests
 - Tests: PHPUnit tests with SQLite database
-- PHP Version: 8.0+ (configured in workflow)
+- PHP Version: Currently 8.0 in workflow (Note: composer.json requires 8.2+, workflow should be updated)
 
 ## Important Notes
 
